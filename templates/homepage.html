@@ -1,0 +1,140 @@
+<!––	HOLIDAY API HOMEPAGE
+		Designer:	Austin Dial
+    	Date:		7/25/2019
+-->
+
+<!DOCTYPE html>
+
+<title>Holiday API</title>
+
+<html>
+
+<head>
+  <style>
+  	a:link {
+  		color				:	black;
+  		background-color	:	transparent;
+  		text-decoration		:	underline; }
+        
+    a:hover {
+  		color				:	black;
+  		background-color	:	yellow;
+  		text-decoration		:	underline; }
+        
+    a:visited {
+  		color				:	black;
+  		background-color	:	transparent;
+  		text-decoration		:	underline; }
+  
+	h3 {
+    	margin-left			:	5%; }
+  	
+	p {	
+    	margin-left			:	5%;
+        margin-right		:	10%; }
+	
+	ul {
+    	padding-left		:	15%;
+        list-style-type		:	bullet;
+        display				:	inline-block; }
+    
+    code {
+    	background-color	: 	#EEE;
+        font-weight			:	bold; }
+    
+    pre code {
+		background-color	:	#EEE;
+		border				:	1px solid #999;
+		display				:	block;
+		padding				:	20px; }
+    
+  </style>
+</head>
+
+<body>
+	
+    <h1 style="background-color:#C14335; color:#FFFFFF; text-align:center;", id="home">HOLIDAY API</h1>
+    <hr>
+    
+    <h2 id="TOC"><a href="#home">Table of Contents</a></h2>
+    <ol>
+    	<li><a href="#introduction">Introduction</a></li>
+        <li><a href="#tutorial">Tutorial</a></li>
+        <ol>
+        	<li><a href="#starting">Starting the API</a></li>
+            <li><a href="#endpoints">Calling Endpoints</a></li>
+        </ol>
+        <li><a href="#version">Version History</a></li>
+        <ol>
+        	<li><a href="#V0.1">V0.1</a></li>
+            <li><a href="#V0.2">V0.2 (upcoming)</a></li>
+        </ol>
+    </ol>
+    
+
+    <h2 id="introduction"><a href="#home">Introduction</a></h2>
+
+    <p>This API was designed for a technical interview with Nerevu Group in 2019. It returns dates for upcoming holidays by scraping the <a href="https://www.timeanddate.com/holidays/us/">Time and Date API</a> into a CSV and then returning subsets of this master file as JSON responses. Please read below to learn about how this API works.</p>
+    
+    <p>To read the development documentation for this API, please visit <code><a href="http://127.0.0.1:5000/docs">http://127.0.0.1:5000/docs</a></code>.</p>
+
+    <h2 id="tutorial"><a href="#home">Tutorial</a></h2>
+    
+    <p>Within this section I will describe how to run and interact with the holiday API.</p>
+    
+    <h3 id="starting"><a href="#home">Starting the API</a></h3>
+
+    <p>To run this API you will need a python environment with the requisite libraries, listed below, and a browser to interact with the API. Most of these modules and libraries are installed by default with the Anaconda Python distribution but I have included links to install these libraries for your convenience:</p>
+
+    <span align="left">
+    	<ul>
+      		<li><a href="https://anaconda.org/anaconda/flask">Flask</a></li>
+      		<li><a href="https://anaconda.org/anaconda/numpy">Numpy</a></li>
+    	</ul>
+
+    	<ul>
+    		<li><a href="https://anaconda.org/anaconda/pandas">Pandas</a></li>
+    		<li><a href="https://anaconda.org/trentonoliphant/datetime">Datetime</a></li>
+    	</ul>
+
+		<ul>
+    		<li><a href="https://anaconda.org/conda-forge/fuzzywuzzy">Fuzzywuzzy</a></li>
+    		<li><a href="https://anaconda.org/conda-forge/regex">Re</a></li>
+    	</ul>
+
+    	<ul>
+    		<li><a href="https://anaconda.org/menpo/pathlib">Pathlib</a></li>
+    	</ul>
+	</span>
+
+	<p>Create a new Anaconda environment and install the required libraries. Keeping your environment active, navigate to the directory of the API and run <code>python API.py</code>. This will start running the API on your local machine at <code>http://127.0.0.1:5000/</code>. Open your browser of choice to <code>http://localhost:5000/</code> and you will arrive on the home page of the API.</p>
+
+	<h3 id="endpoints"><a href="#home">Calling Endpoints</a></h3>
+
+	<p>Thus far there is only one endpoint available within the API. To access this endpoint, go to <code>/api/holiday</code>. This will return the next ten upcoming holidays with respect to the time of the query.</p>
+
+	<p>Using the record_num argument, users can select how many holidays they would like to receive from a single query call. This argument can be passed like so: <code>/api/holiday?record_count=...</code>. The API will return ten holidays if num is not specified.</p>
+    
+    <p>To filter by the type of holiday, users can pass the holiday_type argument through the API like so <code>/api/holiday?holiday_type="..."</code>. Possible filter options include Federal, State, Observance, Jewish, Christian, etc.</p>
+
+	<p>Users may choose to combine several arguments in a single query like so: <code>/api/holiday?record_count=...&holiday_type="...".</code>. It is important to note that using multiple arguments may not return the number of holidays that were expected if the holiday type occurs infrequently or if there are no remaining instances of that holiday within the time period of study.</p>
+
+	<h2 id="version"><a href="#home">Version History</a></h2>
+    
+    <p>This API is new, experimental, and is designed mostly to demonstrate several technical proficiencies. With this context in mind, it is unlikely that it will become a fully fledged API with more complicated features. However, I can see an immediate use for it so I will treat the documentation as if it were the start of something big. Ergo, I have developed the following section to detail the version history of this API as well as to plan for features to come in subsequent versions.</p>
+
+    <h3 id="V0.1"><a href="#home">V0.1</a></h3>
+	
+    <p>This is the first beta version of the API. It has a single endpoint <code>holidays/</code> with arguments holiday_type and record_count available to the user.</p>
+
+	<h3 id="V0.2"><a href="#home">V0.2 (upcoming)</a></h3>
+	
+    <p>Next I will add a screen scraping ability which updates the database on a regular basis by reading from another holiday table.</p>
+
+	<h3 id="V0.3"><a href="#home">V0.3 (upcoming)</a></h3>
+	
+    <p>In the upcoming beta update, the holidays API will have the ability to filter by additional columns such as weekday and name.</p>
+	<p>A help endpoint will be developed to assist users to sort the available holiday type options.</p>
+
+</body>
+</html>
